@@ -1,9 +1,23 @@
 {
-	"cmd": ["crystal", "run", "--no-color", "$file"],
-	"file_regex": "^Error in (?<filename>.+\\.cr):(?<line_number>[0-9]*):?(?<column_number>[0-9]*): (?<message>.+)$",
-	"selector": "source.crystal",
-	"quiet": true,
-	"windows": {
-		"cmd": ["wsl", "crystal", "run", "--no-color", "$file_name"]
-	}
+  "env": {
+    "PATH": "/sbin:/bin:/usr/sbin:/usr/bin:/opt/homebrew/bin:/usr/local/bin"
+  },
+  "cmd": [
+    "shards",
+    "build",
+    "--error-trace"
+  ],
+  "working_dir": "$folder",
+  "file_regex": "^E: Error target .*? failed to compile:\\nIn (?<filename>[^:]+:(?<line_number>[0-9]+):?(?<column_number>[0-9]*)\\n[\\S\\s]*?^(Error:.*)$",
+  "selector": "source.crystal",
+  "quiet": true,
+  "windows": {
+    "cmd": [
+      "wsl",
+      "shards",
+      "build",
+      "--error-trace",
+      "$file_name"
+    ]
+  }
 }
