@@ -94,6 +94,17 @@ contexts:
         6: punctuation.separator.inheritance.crystal
         7: entity.other.inherited-class.module.third.crystal
         8: punctuation.separator.inheritance.crystal
+    - match: '^\s*(enum)\s+(([A-Z\x{80}-\x{10FFFF}][\w\x{80}-\x{10FFFF}]*(::))?([A-Z\x{80}-\x{10FFFF}][\w\x{80}-\x{10FFFF}]*(::))?([A-Z\x{80}-\x{10FFFF}][\w\x{80}-\x{10FFFF}]*(::))*[A-Z\x{80}-\x{10FFFF}][\w\x{80}-\x{10FFFF}]*)'
+      scope: meta.enum.crystal
+      captures:
+        1: keyword.control.enum.crystal
+        2: entity.name.type.enum.crystal
+        3: entity.other.inherited-class.enum.first.crystal
+        4: punctuation.separator.inheritance.crystal
+        5: entity.other.inherited-class.enum.second.crystal
+        6: punctuation.separator.inheritance.crystal
+        7: entity.other.inherited-class.enum.third.crystal
+        8: punctuation.separator.inheritance.crystal
     - match: '^\s*(lib)\s+(([A-Z]\w*(::))?([A-Z]\w*(::))?([A-Z]\w*(::))*[A-Z]\w*)'
       scope: meta.lib.crystal
       captures:
