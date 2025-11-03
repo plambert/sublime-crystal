@@ -23,7 +23,7 @@ comment: |
     This is single quoted.
     The above used #{Time.now}
     THERE
-    symtoms:
+    symptoms:
     From Programming Ruby p306; should be a non-interpolated heredoc.
 
     text:
