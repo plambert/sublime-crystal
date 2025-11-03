@@ -366,7 +366,7 @@ contexts:
              | [\s;]unless\s
              | [\s;]when\s
              | [\s;]assert_match\s
-             | [\s;]or\s      # boolean opperators
+             | [\s;]or\s      # boolean operators
              | [\s;]and\s
              | [\s;]not\s
              | [\s.]index\s     # methods
