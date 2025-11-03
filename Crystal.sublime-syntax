@@ -739,8 +739,8 @@ contexts:
         - include: scope:source.shell
         - include: interpolated_crystal
         - include: escaped_char
-    - match: '(?><<-("?)((?:[_\w]+_|)RUBY)\b\1)'
-      comment: heredoc with embedded crystal and intented terminator
+    - match: '(?><<-("?)((?:[_\w]+_|)CRYSTAL)\b\1)'
+      comment: heredoc with embedded crystal and indented terminator
       captures:
         0: punctuation.definition.string.begin.crystal
       push:
