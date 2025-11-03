@@ -1,0 +1,7 @@
+Excluded:
+  - **/syntax_test_*
+
+Lint/Formatting:
+  Excluded:
+    - **/syntax_test_*
+
