@@ -1,0 +1,12 @@
+{
+  // If I type:
+  //
+  // foo.foo do |foo|
+  //
+  // Before I hit return after the last `|`, it attempts to autocomplete, which is quite annoying.
+  // 
+  // This setting fixes that, but I have not tested it much to see if it breaks autocomplete in other places. Use
+  // with caution.
+  //
+  // "auto_complete_selector": "meta.tag, source - comment - string.quoted.double.block - string.quoted.single.block - string.unquoted.heredoc - punctuation.separator.variable.crystal"
+}
