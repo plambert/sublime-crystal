@@ -29,6 +29,8 @@ class CrystalFormatCommand(sublime_plugin.TextCommand):
     region = sublime.Region(0, vsize)
     src = self.view.substr(region)
     window = self.view.window()
+    if os.path.basename(window.active_view().file_name()).startswith("syntax_test_"):
+      return None
 
     settings = sublime.load_settings('Crystal.sublime-settings')
     #command = [settings.get("crystal_cmd"), "tool", "format", "-", "--format", "json"]
