@@ -765,6 +765,21 @@ contexts:
         - include: scope:source.crystal
         - include: interpolated_crystal
         - include: escaped_char
+    - match: '(?><<-("?)((?:[_\w]+_|)RUBY)\b\1)'
+      comment: heredoc with embedded ruby and indented terminator
+      captures:
+        0: punctuation.definition.string.begin.ruby
+      push:
+        - meta_scope: string.unquoted.embedded.ruby.ruby
+        - meta_content_scope: text.ruby.embedded.ruby
+        - match: \s*\2$
+          captures:
+            0: punctuation.definition.string.end.ruby
+          pop: true
+        - include: heredoc
+        - include: scope:source.ruby
+        - include: interpolated_ruby
+        - include: escaped_char
     - match: (?>\=\s*<<(\w+))
       captures:
         0: punctuation.definition.string.begin.crystal
