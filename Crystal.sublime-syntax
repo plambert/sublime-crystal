@@ -119,9 +119,24 @@ contexts:
     - match: (?<!\.)\belse(\s)+if\b
       comment: else if is a common mistake carried over from other languages. it works if you put in a second end, but it’s never what you want.
       scope: invalid.deprecated.crystal
-    - match: '(?<!\.)\b(BEGIN|alias|as|begin|case|select|abstract|class|END|ensure|for|fun|if|ifdef|in|lib|module|of|out|private|protected|rescue|struct|with|union|enum|macro|then|unless|until|while)\b(?![?!])|(?<!\.)\btype\b\s*(?=[A-Z])'
+    - match: '(?<!\.)\b(BEGIN|alias|as|begin|case|select|abstract|class|END|ensure|for|fun|ifdef|in|lib|module|of|out|private|protected|struct|with|union|enum|macro|then|until|while)\b(?![?!])|(?<!\.)\btype\b\s*(?=[A-Z])'
       comment: everything being a reserved word, not a value and needing a 'end' is a..
       scope: keyword.control.primary.crystal
+    - match: '(?:^\s*)\bif\b'
+      comment: an if block
+      scope: keyword.control.primary.crystal
+    - match: '(?<=\S)\sif\s+(?=\S)'
+      comment: an if modifier
+      scope: keyword.control.secondary.if.crystal
+    - match: '(?:^\s*)\bunless\b'
+      comment: an unless block
+      scope: keyword.control.primary.crystal
+    - match: '(?<=\S)\sunless\s+(?=\S)'
+      comment: an unless modifier
+      scope: keyword.control.secondary.unless.crystal
+    - match: '(?<!\.)\brescue\b(?![?!])|(?<!\.)\btype\b\s*(?=[A-Z])'
+      comment: everything being a reserved word, not a value and needing a 'end' is a..
+      scope: keyword.control.secondary.rescue.crystal
     - match: '(?<!\.)\b(when|else|elsif)\b(?![?!])'
       comment: everything being a reserved word, not a value and needing a 'end' is a..
       scope: keyword.control.secondary.crystal
@@ -134,9 +149,6 @@ contexts:
     - match: '(?<=\{)(\s+)'
       comment: contextual smart pair support
       scope: meta.syntax.crystal.start-block
-    - match: (?<!\.)\b(and|not|or)\b
-      comment: as above, just doesn't need a 'end' and does a logic operation
-      scope: keyword.operator.logical.crystal
     - match: '(?<!\.)\b(alias|alias_method|break|next|pointerof|typeof|sizeof|instance_sizeof|return|super|yield|uninitialized|forall)\b(?![?!])'
       comment: just as above but being not a logical operation
       scope: keyword.control.pseudo-method.crystal
@@ -165,11 +177,7 @@ contexts:
       scope: variable.other.readwrite.class.crystal
       captures:
         1: punctuation.definition.variable.crystal
-    - match: '(\$)[a-zA-Z_]\w*'
-      scope: variable.other.readwrite.global.crystal
-      captures:
-        1: punctuation.definition.variable.crystal
-    - match: '(\$)(!|@|&|`|''|\+|\d+|~|=|/|\\|,|;|\.|<|>|_|\*|\$|\?|:|"|-[0adFiIlpv])'
+    - match: '(\$)(!|@|&|`|\d+|~|\$|\?)'
       scope: variable.other.readwrite.global.pre-defined.crystal
       captures:
         1: punctuation.definition.variable.crystal
@@ -879,10 +887,6 @@ contexts:
         1: punctuation.definition.variable.crystal
     - match: '(#@@)[a-zA-Z_]\w*'
       scope: variable.other.readwrite.class.crystal
-      captures:
-        1: punctuation.definition.variable.crystal
-    - match: '(#\$)[a-zA-Z_]\w*'
-      scope: variable.other.readwrite.global.crystal
       captures:
         1: punctuation.definition.variable.crystal
   nest_brackets:
