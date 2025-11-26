@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+setter ${1:attribute_name} : UInt${2:32}
+$0]]></content>
+  <description>setter (UInt)</description>
+  <tabTrigger>set</tabTrigger>
+  <scope>source.crystal</scope>
+</snippet>

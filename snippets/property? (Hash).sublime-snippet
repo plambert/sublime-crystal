@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+property? ${1:attribute_name} : Hash(${2:String}, ${3:String})${4: = {\} of $2 => $3}
+$0]]></content>
+  <description>property? (Hash)</description>
+  <tabTrigger>prop?</tabTrigger>
+  <scope>source.crystal</scope>
+</snippet>

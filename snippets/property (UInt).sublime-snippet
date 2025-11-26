@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+property ${1:attribute_name} : UInt${2:32}
+$0]]></content>
+  <description>property (UInt)</description>
+  <tabTrigger>prop</tabTrigger>
+  <scope>source.crystal</scope>
+</snippet>

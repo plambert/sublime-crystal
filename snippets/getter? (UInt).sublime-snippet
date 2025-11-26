@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+getter? ${1:attribute_name} : UInt${2:32}
+$0]]></content>
+  <description>getter? (UInt)</description>
+  <tabTrigger>get?</tabTrigger>
+  <scope>source.crystal</scope>
+</snippet>

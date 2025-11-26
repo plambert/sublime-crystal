@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+property? ${1:attribute_name} : Array(${2:String})${3: = [] of $2}
+$0]]></content>
+  <description>property? (Array)</description>
+  <tabTrigger>prop?</tabTrigger>
+  <scope>source.crystal</scope>
+</snippet>

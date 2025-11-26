@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+getter ${1:attribute_name} : Hash(${2:String}, ${3:String})${4: = {\} of $2 => $3}
+$0]]></content>
+  <description>getter (Hash)</description>
+  <tabTrigger>get</tabTrigger>
+  <scope>source.crystal</scope>
+</snippet>

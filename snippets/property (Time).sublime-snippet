@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+property ${1:attribute_name} : Time
+$0]]></content>
+  <description>property (Time)</description>
+  <tabTrigger>prop</tabTrigger>
+  <scope>source.crystal</scope>
+</snippet>

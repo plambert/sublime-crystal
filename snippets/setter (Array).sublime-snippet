@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+setter ${1:attribute_name} : Array(${2:String})${3: = [] of $2}
+$0]]></content>
+  <description>setter (Array)</description>
+  <tabTrigger>set</tabTrigger>
+  <scope>source.crystal</scope>
+</snippet>

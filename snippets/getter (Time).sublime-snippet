@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+getter ${1:attribute_name} : Time
+$0]]></content>
+  <description>getter (Time)</description>
+  <tabTrigger>get</tabTrigger>
+  <scope>source.crystal</scope>
+</snippet>
