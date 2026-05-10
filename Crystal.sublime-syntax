@@ -48,6 +48,18 @@ first_line_match: ^#!/.*\bcrystal
 scope: source.crystal
 contexts:
   main:
+    - match: '\{%'
+      comment: beginning of a macro statement
+      scope: keyword.control.macro.crystal
+      push:
+        # - meta_scope: meta.environment.embedded.crystal-macro
+        - match: '%\}'
+          captures:
+            0: keyword.control.macro.crystal
+          pop: true
+        - include: crystal-macro
+      # escape_captures:
+      #   0: meta.environment.embedded.crystal-macro
     - match: |-
         (?x)
           ^
@@ -116,7 +128,7 @@ contexts:
         6: punctuation.separator.inheritance.crystal
         7: entity.other.inherited-class.lib.third.crystal
         8: punctuation.separator.inheritance.crystal
-    - match: (?<!\.)\belse(\s)+if\b
+    - match: (?<!\.)\belse(\s+)if\b
       comment: else if is a common mistake carried over from other languages. it works if you put in a second end, but it’s never what you want.
       scope: invalid.deprecated.crystal
     - match: '(?<!\.)\b(BEGIN|alias|as|begin|case|select|abstract|class|END|ensure|for|fun|ifdef|in|lib|module|of|out|private|protected|struct|with|union|enum|macro|then|until|while)\b(?![?!])|(?<!\.)\btype\b\s*(?=[A-Z])'
@@ -248,7 +260,7 @@ contexts:
         3: entity.name.function.crystal
     - match: '\b(0[xX]\h(?>_?\h)*|\d(?>_?\d)*(\.(?![^[:space:][:digit:]])(?>_?\d)*)?([eE][-+]?\d(?>_?\d)*)?|0[bB][01]+|0o[0-7]+)(_?(u8|u16|u32|u64|i8|i16|i32|i64|f32|f64))?\b'
       scope: constant.numeric.crystal
-    - match: ':'''
+    - match: ":'"
       captures:
         0: punctuation.definition.constant.crystal
       push:
@@ -297,13 +309,13 @@ contexts:
           pop: true
         - include: interpolated_crystal
         - include: escaped_char
-    - match: '`'
+    - match: "`"
       comment: execute string (allows for interpolation)
       captures:
         0: punctuation.definition.string.begin.crystal
       push:
         - meta_scope: string.interpolated.crystal
-        - match: '`'
+        - match: "`"
           captures:
             0: punctuation.definition.string.end.crystal
           pop: true
@@ -414,7 +426,7 @@ contexts:
         2: punctuation.definition.string.crystal
       push:
         - meta_content_scope: string.regexp.classic.crystal
-        - match: '((/[eimnosux]*))'
+        - match: "((/[eimnosux]*))"
           captures:
             1: string.regexp.classic.crystal
             2: punctuation.definition.string.crystal
@@ -493,7 +505,7 @@ contexts:
         - include: escaped_char
         - include: nest_parens_i
     - match: '%[QWSR]?\['
-      comment: 'literal capable of interpolation []'
+      comment: "literal capable of interpolation []"
       captures:
         0: punctuation.definition.string.begin.crystal
       push:
@@ -519,7 +531,7 @@ contexts:
         - include: escaped_char
         - include: nest_ltgt_i
     - match: '%[QWSR]?\{'
-      comment: 'literal capable of interpolation -- {}'
+      comment: "literal capable of interpolation -- {}"
       captures:
         0: punctuation.definition.string.begin.crystal
       push:
@@ -570,7 +582,7 @@ contexts:
           scope: constant.character.escape.crystal
         - include: nest_ltgt
     - match: '%[qws]\['
-      comment: 'literal incapable of interpolation -- []'
+      comment: "literal incapable of interpolation -- []"
       captures:
         0: punctuation.definition.string.begin.crystal
       push:
@@ -583,7 +595,7 @@ contexts:
           scope: constant.character.escape.crystal
         - include: nest_brackets
     - match: '%[qws]\{'
-      comment: 'literal incapable of interpolation -- {}'
+      comment: "literal incapable of interpolation -- {}"
       captures:
         0: punctuation.definition.string.begin.crystal
       push:
@@ -821,11 +833,11 @@ contexts:
           captures:
             1: punctuation.separator.variable.crystal
           pop: true
-        - match: '[_a-zA-Z][_a-zA-Z0-9]*'
+        - match: "[_a-zA-Z][_a-zA-Z0-9]*"
           scope: variable.other.block.crystal
-        - match: ','
+        - match: ","
           scope: punctuation.separator.variable.crystal
-    - match: '=>'
+    - match: "=>"
       scope: punctuation.separator.key-value
     - match: '<<=|%=|&=|\*=|\*\*=|\+=|\-=|\^=|\|{1,2}=|<<'
       scope: keyword.operator.assignment.augmented.crystal
@@ -833,19 +845,17 @@ contexts:
       scope: keyword.operator.comparison.crystal
     - match: '(?<=[ \t])!+|\bnot\b|&&|\band\b|\|\||\bor\b|\^'
       scope: keyword.operator.logical.crystal
-    - match: '(\{\%|\%\}|\{\{|\}\})'
-      scope: keyword.operator.macro.crystal
     - match: (%|&|\*\*|\*|\+|\-|/)
       scope: keyword.operator.arithmetic.crystal
-    - match: '='
+    - match: "="
       scope: keyword.operator.assignment.crystal
     - match: \||~|>>
       scope: keyword.operator.other.crystal
-    - match: ':'
+    - match: ":"
       scope: punctuation.separator.other.crystal
     - match: \;
       scope: punctuation.separator.statement.crystal
-    - match: ','
+    - match: ","
       scope: punctuation.separator.object.crystal
     - match: '\.|::'
       scope: punctuation.separator.method.crystal
@@ -1065,3 +1075,20 @@ contexts:
       scope: comment.line.number-sign.crystal
       captures:
         1: punctuation.definition.comment.crystal
+  crystal-macro:
+    - match: \bbegin\b
+      comment: beginning of a macro section
+      scope: keyword.control.primary.begin.crystal-macro
+    - match: \b(for)\s+(.*?)\s+(in)\s+((?:(?!%\}).)*)
+      comment: a for loop
+      captures:
+        1: keyword.control.primary.for.crystal-macro
+        2: variable.other.block.crystal-macro
+        3: keyword.control.secondary.in.crystal-macro
+        4: variable.language.crystal-macro
+    - match: \bwhile\b
+      comment: a while loop
+      scope: keyword.control.primary.while.crystal-macro
+    - match: \bend\b
+      comment: end of a macro section
+      scope: keyword.control.secondary.end.crystal-macro
