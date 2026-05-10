@@ -285,18 +285,12 @@ contexts:
     - match: /=
       comment: Needs higher precidence than regular expressions.
       scope: keyword.operator.assignment.augmented.crystal
-    - match: "'"
-      comment: single quoted string (does not allow interpolation)
-      captures:
-        0: punctuation.definition.string.begin.crystal
-      push:
-        - meta_scope: string.quoted.single.crystal
-        - match: "'"
-          captures:
-            0: punctuation.definition.string.end.crystal
-          pop: true
-        - match: \\'|\\\\
-          scope: constant.character.escape.crystal
+    - match: '''(?:\\(?:u\h{4}|u\{\h{1,6}\}|[^\n])|[^''\\\n])'''
+      comment: character literal — a single character or escape sequence in single quotes
+      scope: constant.character.crystal
+    - match: '''[^''\n]*'''
+      comment: malformed character literal — empty or contains more than one character
+      scope: invalid.illegal.character.crystal
     - match: '"'
       comment: double quoted string (allows for interpolation)
       captures:
