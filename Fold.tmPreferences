@@ -25,6 +25,14 @@
                 <key>excludeTrailingNewlines</key>
                 <true/>
             </dict>
+            <dict>
+                <key>begin</key>
+                <string>keyword.control.primary.begin.crystal-macro|keyword.control.primary.for.crystal-macro|keyword.control.primary.while.crystal-macro</string>
+                <key>end</key>
+                <string>keyword.control.secondary.end.crystal-macro</string>
+                <key>excludeTrailingNewlines</key>
+                <true/>
+            </dict>
         </array>
     </dict>
 </dict>
