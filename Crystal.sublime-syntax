@@ -648,152 +648,131 @@ contexts:
       captures:
         0: punctuation.definition.string.begin.crystal
       push:
-        - meta_scope: string.unquoted.embedded.html.crystal
-        - meta_content_scope: text.html.embedded.crystal
-        - match: \s*\2$
-          captures:
+        - match: ^
+          embed: scope:text.html.basic
+          embed_scope: string.unquoted.embedded.html.crystal text.html.embedded.crystal
+          escape: '^\s*(?:[_\w]+_|)HTML$'
+          escape_captures:
             0: punctuation.definition.string.end.crystal
-          pop: true
-        - include: heredoc
-        - include: scope:text.html.basic
-        - include: interpolated_crystal
-        - include: escaped_char
+          pop: 1
+        - include: main
     - match: '(?><<-("?)((?:[_\w]+_|)SQL)\b\1)'
       comment: heredoc with embedded SQL and indented terminator
       captures:
         0: punctuation.definition.string.begin.crystal
       push:
-        - meta_scope: string.unquoted.embedded.sql.crystal
-        - meta_content_scope: text.sql.embedded.crystal
-        - match: \s*\2$
-          captures:
+        - match: ^
+          embed: scope:source.sql
+          embed_scope: string.unquoted.embedded.sql.crystal text.sql.embedded.crystal
+          escape: '^\s*(?:[_\w]+_|)SQL$'
+          escape_captures:
             0: punctuation.definition.string.end.crystal
-          pop: true
-        - include: heredoc
-        - include: scope:source.sql
-        - include: interpolated_crystal
-        - include: escaped_char
+          pop: 1
+        - include: main
     - match: '(?><<-("?)((?:[_\w]+_|)CSS)\b\1)'
-      comment: heredoc with embedded css and intented terminator
+      comment: heredoc with embedded CSS and indented terminator
       captures:
         0: punctuation.definition.string.begin.crystal
       push:
-        - meta_scope: string.unquoted.embedded.css.crystal
-        - meta_content_scope: text.css.embedded.crystal
-        - match: \s*\2$
-          captures:
+        - match: ^
+          embed: scope:source.css
+          embed_scope: string.unquoted.embedded.css.crystal text.css.embedded.crystal
+          escape: '^\s*(?:[_\w]+_|)CSS$'
+          escape_captures:
             0: punctuation.definition.string.end.crystal
-          pop: true
-        - include: heredoc
-        - include: scope:source.css
-        - include: interpolated_crystal
-        - include: escaped_char
+          pop: 1
+        - include: main
     - match: '(?><<-("?)((?:[_\w]+_|)CPP)\b\1)'
-      comment: heredoc with embedded c++ and intented terminator
+      comment: heredoc with embedded C++ and indented terminator
       captures:
         0: punctuation.definition.string.begin.crystal
       push:
-        - meta_scope: string.unquoted.embedded.cplusplus.crystal
-        - meta_content_scope: text.c++.embedded.crystal
-        - match: \s*\2$
-          captures:
+        - match: ^
+          embed: scope:source.c++
+          embed_scope: string.unquoted.embedded.cplusplus.crystal text.c++.embedded.crystal
+          escape: '^\s*(?:[_\w]+_|)CPP$'
+          escape_captures:
             0: punctuation.definition.string.end.crystal
-          pop: true
-        - include: heredoc
-        - include: scope:source.c++
-        - include: interpolated_crystal
-        - include: escaped_char
+          pop: 1
+        - include: main
     - match: '(?><<-("?)((?:[_\w]+_|)C)\b\1)'
-      comment: heredoc with embedded c++ and intented terminator
+      comment: heredoc with embedded C and indented terminator
       captures:
         0: punctuation.definition.string.begin.crystal
       push:
-        - meta_scope: string.unquoted.embedded.c.crystal
-        - meta_content_scope: text.c.embedded.crystal
-        - match: \s*\2$
-          captures:
+        - match: ^
+          embed: scope:source.c
+          embed_scope: string.unquoted.embedded.c.crystal text.c.embedded.crystal
+          escape: '^\s*(?:[_\w]+_|)C$'
+          escape_captures:
             0: punctuation.definition.string.end.crystal
-          pop: true
-        - include: heredoc
-        - include: scope:source.c
-        - include: interpolated_crystal
-        - include: escaped_char
+          pop: 1
+        - include: main
     - match: '(?><<-("?)((?:[_\w]+_|)(?:JS|JAVASCRIPT))\b\1)'
-      comment: heredoc with embedded javascript and intented terminator
+      comment: heredoc with embedded JavaScript and indented terminator
       captures:
         0: punctuation.definition.string.begin.crystal
       push:
-        - meta_scope: string.unquoted.embedded.js.crystal
-        - meta_content_scope: text.js.embedded.crystal
-        - match: \s*\2$
-          captures:
+        - match: ^
+          embed: scope:source.js
+          embed_scope: string.unquoted.embedded.js.crystal text.js.embedded.crystal
+          escape: '^\s*(?:[_\w]+_|)(?:JS|JAVASCRIPT)$'
+          escape_captures:
             0: punctuation.definition.string.end.crystal
-          pop: true
-        - include: heredoc
-        - include: scope:text.html.basic
-        - include: scope:source.js
-        - include: interpolated_crystal
-        - include: escaped_char
+          pop: 1
+        - include: main
     - match: '(?><<-("?)((?:[_\w]+_|)JQUERY)\b\1)'
-      comment: heredoc with embedded javascript and intented terminator
+      comment: heredoc with embedded JavaScript and indented terminator
       captures:
         0: punctuation.definition.string.begin.crystal
       push:
-        - meta_scope: string.unquoted.embedded.js.crystal
-        - meta_content_scope: text.js.embedded.crystal
-        - match: \s*\2$
-          captures:
+        - match: ^
+          embed: scope:source.js
+          embed_scope: string.unquoted.embedded.js.crystal text.js.embedded.crystal
+          escape: '^\s*(?:[_\w]+_|)JQUERY$'
+          escape_captures:
             0: punctuation.definition.string.end.crystal
-          pop: true
-        - include: heredoc
-        - include: scope:source.js
-        - include: interpolated_crystal
-        - include: escaped_char
+          pop: 1
+        - include: main
     - match: '(?><<-("?)((?:[_\w]+_|)(?:SH|SHELL))\b\1)'
-      comment: heredoc with embedded shell and intented terminator
+      comment: heredoc with embedded shell and indented terminator
       captures:
         0: punctuation.definition.string.begin.crystal
       push:
-        - meta_scope: string.unquoted.embedded.shell.crystal
-        - meta_content_scope: text.shell.embedded.crystal
-        - match: \s*\2$
-          captures:
+        - match: ^
+          embed: scope:source.shell
+          embed_scope: string.unquoted.embedded.shell.crystal text.shell.embedded.crystal
+          escape: '^\s*(?:[_\w]+_|)(?:SH|SHELL)$'
+          escape_captures:
             0: punctuation.definition.string.end.crystal
-          pop: true
-        - include: heredoc
-        - include: scope:source.shell
-        - include: interpolated_crystal
-        - include: escaped_char
+          pop: 1
+        - include: main
     - match: '(?><<-("?)((?:[_\w]+_|)CRYSTAL)\b\1)'
-      comment: heredoc with embedded crystal and indented terminator
+      comment: heredoc with embedded Crystal and indented terminator
       captures:
         0: punctuation.definition.string.begin.crystal
       push:
-        - meta_scope: string.unquoted.embedded.crystal.crystal
-        - meta_content_scope: text.crystal.embedded.crystal
-        - match: \s*\2$
-          captures:
+        - match: ^
+          embed: scope:source.crystal
+          embed_scope: string.unquoted.embedded.crystal.crystal text.crystal.embedded.crystal
+          escape: '^\s*(?:[_\w]+_|)CRYSTAL$'
+          escape_captures:
             0: punctuation.definition.string.end.crystal
-          pop: true
-        - include: heredoc
-        - include: scope:source.crystal
-        - include: interpolated_crystal
-        - include: escaped_char
+          pop: 1
+        - include: main
     - match: '(?><<-("?)((?:[_\w]+_|)RUBY)\b\1)'
-      comment: heredoc with embedded ruby and indented terminator
+      comment: heredoc with embedded Ruby and indented terminator
       captures:
         0: punctuation.definition.string.begin.ruby
       push:
-        - meta_scope: string.unquoted.embedded.ruby.ruby
-        - meta_content_scope: text.ruby.embedded.ruby
-        - match: \s*\2$
-          captures:
+        - match: ^
+          embed: scope:source.ruby
+          embed_scope: string.unquoted.embedded.ruby.ruby text.ruby.embedded.ruby
+          escape: '^\s*(?:[_\w]+_|)RUBY$'
+          escape_captures:
             0: punctuation.definition.string.end.ruby
-          pop: true
-        - include: heredoc
-        - include: scope:source.ruby
-        - include: interpolated_ruby
-        - include: escaped_char
+          pop: 1
+        - include: main
     - match: (?>\=\s*<<(\w+))
       captures:
         0: punctuation.definition.string.begin.crystal
